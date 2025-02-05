@@ -3,11 +3,18 @@ import { CiSearch } from "react-icons/ci";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const cartData=useSelector((store)=>store.cart.items)
+  let quant=0
+  // console.log(cartData)
+  cartData.map((item)=>quant+=item.quantity)
   return (
     <div className="h-[5rem] py-2 shadow-lg px-[10%] grid grid-flow-col fixed w-full top-0 bg-white z-20">
       <div className="col-span-2 flex items-center">
+        <Link to='/'>
         <svg className="VXJlj" viewBox="0 0 61 61" height="49" width="49">
           <g clipPath="url(#a)">
             <path
@@ -27,32 +34,38 @@ const Header = () => {
             </clipPath>
           </defs>
         </svg>
+        </Link>
       </div>
       <div className="col-span-1  flex justify-between px-5">
-        <div className="flex items-center gap-2 cursor-pointer">
+        <Link to="/search" className="flex items-center gap-2 cursor-pointer">
             <CiSearch className="size-[1.5rem]"/>
             <p className="font-semibold">
             Search
             </p>
-        </div>
-        <div className="flex items-center gap-2 cursor-pointer">
+        </Link>
+        <Link to="/support" className="flex items-center gap-2 cursor-pointer">
             <TfiHelpAlt className="size-[1.5rem]"/>
             <p className="font-semibold">
             Help
             </p>
-        </div>        
-        <div className="flex items-center gap-2 cursor-pointer">
+        </Link>        
+        <Link to='/' className="flex items-center gap-2 cursor-pointer">
             <CiUser className="size-[1.5rem]"/>
             <p className="font-semibold">
             Sign In
             </p>
-        </div>        
-        <div className="flex items-center gap-2 cursor-pointer">
-            <CiShoppingCart className="size-[1.5rem]"/>
+        </Link>  
+        <Link to="/cart" className="flex items-center gap-2 cursor-pointer">
+        {/* <> */}
+        <div className="relative ">
+            <CiShoppingCart className="size-[2.2rem] relative"/>
+              <span className="absolute top-[25%] left-[42.5%] text-[0.7rem] font-semibold">{quant}</span>
+        </div>
             <p className="font-semibold">
             Cart
             </p>
-        </div>
+        {/* </Link>       */}
+        </Link>
       </div>
     </div>
   );

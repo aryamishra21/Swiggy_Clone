@@ -2,8 +2,10 @@ import React from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import ItemCard from "./ItemCard";
 
-const MenuAccordions = ({ item, isVisible, setIsVisible, category }) => {
-  console.log('item',item)
+const MenuAccordions = ({ item, isVisible, setIsVisible, category, location, handleRestart }) => {
+  // console.log('item',item)
+  console.log('menuAccordion location',location)
+
   if (!item?.card?.card) return null; // Prevents crashes if data is missing
 
   // Filter item cards based on category
@@ -34,7 +36,7 @@ const MenuAccordions = ({ item, isVisible, setIsVisible, category }) => {
       <div>
         {/* Category Header */}
         <div
-          className="flex justify-between shadow-md p-4 items-center cursor-pointer"
+          className="flex justify-between shadow-md p-4 items-center cursor-pointer "
           onClick={() => {
             setIsVisible((prev) =>
               prev.includes(item.card.card.title)
@@ -80,7 +82,7 @@ const MenuAccordions = ({ item, isVisible, setIsVisible, category }) => {
               {isVisible.includes(`inner-${val.title}`) &&
                 val.itemCards.map((innerVal) => (
                   <div className="w-[95%] mx-auto" key={innerVal.card.info.id}>
-                    <ItemCard card={innerVal} category={category} />
+                    <ItemCard card={innerVal} category={category} location={location} handleRestart={handleRestart}/>
                     <hr className="p-2" />
                   </div>
                 ))}
@@ -90,7 +92,7 @@ const MenuAccordions = ({ item, isVisible, setIsVisible, category }) => {
         {/* Standalone Items */}
         {isVisible.includes(item.card.card.title) &&
           filteredItemCards.map((card) => (
-            <ItemCard key={card.card.info.id} card={card} category={category} />
+            <ItemCard key={card.card.info.id} card={card} location={location} handleRestart={handleRestart} />
           ))}
       </div>
     </div>

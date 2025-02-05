@@ -21,7 +21,7 @@ const HomePage = () => {
             <button onClick={fetchMoreData}>find more</button>
             ) }
         </div> */}
-        {isLoading && <p><ShimmerCard/></p>}
+        {isLoading && <div className='mx-[13%]'><ShimmerCard/></div>}
     </div>
   )
 }

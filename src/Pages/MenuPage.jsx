@@ -7,7 +7,9 @@ import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
 import MenuAccordions from "../components/MenuAccordions";
 import PageNotFound from "../components/PageNotFound";
-
+import { useDispatch, useSelector } from "react-redux";
+import { LuShoppingBag } from "react-icons/lu";
+import { clearCart } from "../utils/store/cartSlice";
 const scrollWidth = 250;
 
 const MenuPage = () => {
@@ -17,8 +19,22 @@ const MenuPage = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isVisible, setIsVisible] = useState("");
   const [category, setCategory] = useState("");
+  const [restart, setRestart] = useState(false);
+  const dispatch=useDispatch();
+  const cartData=useSelector((store)=>store.cart.items)
+  let quant=0
+  cartData?.map((item)=>quant+=item.quantity)
   if (menu == null) return <ShimmerCard />;
   if (!menu.cards) return <PageNotFound />;
+
+  const lastCard =
+  menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(-1)[0];
+
+const location = lastCard?.card?.card || {};
+console.log(location , 'menu page location')
+
+  const handleRestart=()=>setRestart(!restart);
+  // console.log(menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[(menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.length-1)], 'menu')
   const {
     name,
     totalRatingsString,
@@ -55,7 +71,7 @@ const MenuPage = () => {
   };
 
   return (
-    <div className="mt-28 mx-[24%]">
+    <div className="mt-28 mb-10 mx-[24%]">
       <p className="text-[0.7rem] ">
         <Link to="/">
           <span className="text-gray-500 hover:text-black">Home</span>
@@ -254,10 +270,31 @@ const MenuPage = () => {
               isVisible={isVisible}
               category={category}
               setIsVisible={setIsVisible}
-              key={i}
+              key={item+i}
+              location={location}
+              handleRestart={handleRestart}
             />
           ))}
       </div>
+      {restart && <div className=" fixed w-[32rem] border h-[12rem] bottom-[5%] bg-white left-[33%] z-20 shadow-2xl p-8 ">
+        <p className="font-bold text-lg">Items already in cart</p>
+        <p className="text-sm text-gray-500 pt-1">Your cart contains items from other restaurant. Would you like to reset your cart for adding items from this restaurant?</p>
+        <div className="mt-3 flex justify-between">
+          <button className="p-3 w-[45%] font-semibold border-2 text-[#60B246] border-[#60B246]" onClick={handleRestart}>NO</button>
+          <button className="p-3 w-[45%] font-semibold text-white bg-[#60B246]"onClick={()=>{
+            dispatch(clearCart());
+            handleRestart();
+          }}>YES, START AFRESH</button>
+          <button></button>
+        </div>
+      </div>}
+      {quant>0 && <div className="w-[52%] fixed bottom-0 h-[3rem] z-10 bg-[#60B246]  left-[24%] flex justify-between px-3 items-center text-white text-sm font-bold">
+        <p>{quant} item{quant>1 && "s"} added</p>
+          <Link to='/cart' className="flex items-center gap-2">
+          <p>VIEW CART</p>
+          <LuShoppingBag className="size-[1.4rem]"/>
+          </Link>
+      </div>}
     </div>
   );
 };

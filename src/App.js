@@ -3,11 +3,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import AppLayout from './components/AppLayout';
 import HomePage from './Pages/HomePage';
-import SearhPage from './Pages/SearhPage';
+import SearchPage from './Pages/SearchPage';
 import SupportPage from './Pages/SupportPage';
 import CartPage from './Pages/CartPage';
 import MenuPage from './Pages/MenuPage';
-import TestAccordion from './components/TestAccordion';
+import CollectionPage from './Pages/CollectionPage';
 
 const route=createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const route=createBrowserRouter([
       },
       {
         path:'/search',
-        element:<SearhPage/>
+        element:<SearchPage/>
       },
       {
         path:'/support',
@@ -31,18 +31,19 @@ const route=createBrowserRouter([
         element:<CartPage/>
       },
       {
-        path:'/restaurant/:id',
-        element:<MenuPage/>
+        path:'/collections/:id',
+        element:<CollectionPage/>
       },
       {
-        path:'/test',
-        element:<TestAccordion/>
-      },
+        path:'/restaurant/:id',
+        element:<MenuPage/>
+      }
     ]
   }
 ])
 function App() {
   return (
+    
     <RouterProvider router={route}/>
   );
 }
