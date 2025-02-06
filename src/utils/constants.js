@@ -4,3 +4,10 @@ const baseDataURL='https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.61450&
 export const preSearchURL='https://www.swiggy.com/dapi/landing/PRE_SEARCH?lat=28.56184&lng=77.4104894'
 
 export default baseDataURL
+
+
+//menu shimmer
+// help page 
+// login
+// cart view from header
+//responsive

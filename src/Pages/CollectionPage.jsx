@@ -118,7 +118,6 @@ const CollectionPage = () => {
           .map((val) => (
             <div key={val?.card?.card?.info?.id}>
               <Link to={"/restaurant/" + val?.card?.card?.info?.id}>
-                <p>{val?.card?.card?.info?.id}</p>
                 <RestaurantCard info={val?.card?.card?.info} />
               </Link>
             </div>

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import store from '../utils/store/store'
 import ItemCard from '../components/ItemCard'
 import CartCard from '../components/CartCard'
+import EmptyCart from '../components/EmptyCart'
 
 const CartPage = () => {
   const cartItems=useSelector((store)=>store.cart.items)
@@ -13,7 +14,7 @@ const CartPage = () => {
       acc + ((item?.finalPrice ?? item?.defaultPrice ?? item?.price ?? 0) * item?.quantity), 0
     );
   }, [cartItems]);
-  if(!(cartItems.length)) return (<div className='mt-28'>no items in cart</div>)
+  if(!(cartItems.length)) return (<EmptyCart/>)
   return (
     <div className='w-full mt-20 bg-gray-300 '>
       <div className='w-[80%] mx-auto  mt-20 bg-white p-6'>

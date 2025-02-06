@@ -11,7 +11,7 @@ const AppLayout = () => {
         <ScrollToTop/>
         <Header/>
         <Outlet/>
-        <Footer/>
+        {/* <Footer/> */}
     </Provider>
   )
 }
