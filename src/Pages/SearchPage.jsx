@@ -12,6 +12,7 @@ import { addSuggestion } from "../utils/store/searchSlice";
 const SearchPage = () => {
   const storedSugg = useSelector((store) => store.search.data);
   const [searchText, setSearchText] = useState("");
+  const [searchSugg, setSearchSugg] = useState([]);
   const [preSearchData, setPreSearchData] = useState(null);
   const [searchData, setSearchData] = useState([]);
   const [showSearchData, setShowSearchData] = useState(false);
