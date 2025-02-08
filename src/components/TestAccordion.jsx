@@ -17,7 +17,7 @@ const AccordionData=[
     }
 ]
 const TestAccordions = ({ item, isVisible, setIsVisible }) => {
-  console.log('isvisible',isVisible)
+  // console.log('isvisible',isVisible)
   return (
     <div>
       <div>

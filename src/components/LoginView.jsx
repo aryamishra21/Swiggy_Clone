@@ -57,7 +57,7 @@ const LoginView = ({ setShowLogin }) => {
                   cred.email == data.email &&
                   cred.password == data.password
                 ) {
-                    console.log('1')
+                    // console.log('1')
                   dispatch(login(cred.email));
                   reset();
                   setUserNotFound("");
@@ -65,10 +65,10 @@ const LoginView = ({ setShowLogin }) => {
                   cred.email == data.email &&
                   cred.password != data.password
                 ) {
-                    console.log('2')
+                    // console.log('2')
                   setUserNotFound("Incorrect Password");
                 } else {
-                    console.log('3')
+                    // console.log('3')
                   setUserNotFound("User Not Found");
                 }
               })
@@ -196,7 +196,7 @@ const LoginView = ({ setShowLogin }) => {
             action=""
             className="mt-8"
             onSubmit={handleSubmit((data) => {
-              console.log(data);
+              // console.log(data);
               dispatch(
                 signUp({
                   name: data.name,

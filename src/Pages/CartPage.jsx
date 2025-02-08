@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 const CartPage = () => {
   const cartItems=useSelector((store)=>store.cart.items)
   const cartLocation=useSelector((store)=>store.cart.location)
-  console.log('cart',cartItems,cartLocation)
+  // console.log('cart',cartItems,cartLocation)
   const sum = useMemo(() => {
     return cartItems.reduce((acc, item) => 
       acc + ((item?.finalPrice ?? item?.defaultPrice ?? item?.price ?? 0) * item?.quantity), 0

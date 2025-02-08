@@ -3,7 +3,7 @@ import { imgURL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { reduceNo, increaseNo } from "../utils/store/cartSlice";
 const CartCard = ({ item }) => {
-  console.log("cardcc", item);
+  // console.log("cardcc", item);
   const dispatch = useDispatch();
   return (
     <div className="flex justify-between w-[100%] sm:h-[12rem] h-[25rem] items-center p-3 my-3 shadow-md rounded-xl flex-col sm:flex-row ">

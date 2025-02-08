@@ -4,7 +4,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { imgURL } from "./../utils/constants";
 
 const DishView = ({ info }) => {
-    console.log('info',info)
+    // console.log('info',info)
     const[displayFull,setDisplayFull]=useState(false)
   return (
     <div className="m-4 rounded-2xl h-[15rem] bg-white p-3 text-sm text-gray-600 ">
