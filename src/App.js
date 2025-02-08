@@ -22,10 +22,10 @@ const route=createBrowserRouter([
         path:'/search',
         element:<SearchPage/>
       },
-      {
-        path:'/support',
-        element:<SupportPage/>
-      },
+      // {
+      //   path:'/support',
+      //   element:<SupportPage/>
+      // },
       {
         path:'/cart',
         element:<CartPage/>

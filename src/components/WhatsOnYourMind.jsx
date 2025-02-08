@@ -9,7 +9,7 @@ const WhatsOnYourMind = ({ data }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const refContainer = useRef(); 
   const collectionId=data?.card?.imageGridCards?.info[0].action.link.split('?')[0].split('collections/')[1];
-  console.log('whats ',data)
+  // console.log('whats ',data)
   const handleScroll = (scrollBy) => {
     const currentScroll = refContainer.current.scrollLeft; 
     const maxScroll = refContainer.current.scrollWidth - refContainer.current.clientWidth;

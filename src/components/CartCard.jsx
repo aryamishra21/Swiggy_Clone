@@ -6,8 +6,8 @@ const CartCard = ({ item }) => {
   console.log("cardcc", item);
   const dispatch = useDispatch();
   return (
-    <div className="flex justify-between w-[100%] h-[12rem] items-center p-3 my-3 shadow-md rounded-xl">
-      <div className="w-[65%] h-full">
+    <div className="flex justify-between w-[100%] sm:h-[12rem] h-[25rem] items-center p-3 my-3 shadow-md rounded-xl flex-col sm:flex-row ">
+      <div className="sm:w-[65%] w-[100%] h-full">
         <p>
           {item?.itemAttribute?.vegClassifier == "NONVEG" ? (
             <svg
@@ -96,7 +96,7 @@ const CartCard = ({ item }) => {
           {item?.description?.slice(0, 135)} {item?.description?.length>135 && '...'} 
         </p>
       </div>
-      <div className="w-[25%] h-[80%]  flex flex-col relative ">
+      <div className="sm:w-[25%] w-[65%] h-[80%]  flex flex-col relative ">
         {item?.imageId && (
           <img
             src={imgURL + item?.imageId}
@@ -107,14 +107,18 @@ const CartCard = ({ item }) => {
         <div className="absolute -bottom-[5%] left-[20%] bg-white border p-1 text-green-600 font-bold text-xl w-[60%] mx-auto shadow-lg rounded-[10px] flex justify-between items-center">
           <button
             className="flex-1 text-center mb-0.5"
-            onClick={() => dispatch(reduceNo(item?.id))}
+            onClick={(e) => {
+              e.preventDefault()
+              dispatch(reduceNo(item?.id))}}
           >
             -
           </button>
           <p className="flex-1 text-center text-lg ">{item?.quantity}</p>
           <button
             className="flex-1 text-center mb-0.5 font-extrabold"
-            onClick={() => dispatch(increaseNo(item?.id))}
+            onClick={(e) => {
+              e.preventDefault()
+              dispatch(increaseNo(item?.id))}}
           >
             +
           </button>

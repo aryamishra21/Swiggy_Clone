@@ -57,7 +57,7 @@ const CollectionPage = () => {
   if (!data.length) return <ShimmerCard />;
   return (
     <div
-      className="mt-20 pt-14 border px-[9%] p-2 overflow-y-auto scrollbar "
+      className="mt-20 pt-14 border px-[5%] md:px-[9%] p-2 overflow-y-auto scrollbar "
       ref={refContainer}
       onScroll={handleScroll}
       style={{ height: "calc(100vh - 115px)" }}
@@ -96,7 +96,7 @@ const CollectionPage = () => {
                   <label className="cursor-pointer">{option.label}</label>
                   <input
                     type="radio"
-                    className="mt-1 accent-orange-500"
+                    className="mt-1 "
                     value={option.value}
                     checked={filter === option.value}
                     readOnly
@@ -110,7 +110,7 @@ const CollectionPage = () => {
       <p className="font-bold text-2xl text-gray-800 mt-2 mb-10">
         {count} to explore
       </p>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
 
         {/* remove duplicates */}
         {(filter ? filteredData : data)

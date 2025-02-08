@@ -49,14 +49,20 @@ const ItemCard = ({ card, location, handleRestart }) => {
     } else {
       // console.log("Different location. Restarting cart.".location.name,cartLocation.name);
       handleRestart();
+      // if (!cartItems.length){
+
+      //   let infoWithQuantity = { ...inf, quantity: 1 };
+        
+      //   dispatch(addNewItem({ order: infoWithQuantity, location: location })); 
+      // }
     }
   };
   
 
-  console.log('cart',cartItems,cartLocation)
+  // console.log('cart',cartItems,cartLocation)
   return (
-    <div className=" flex justify-between w-full h-[13rem] items-center p-3 ">
-      <div className="w-[75%] h-full">
+    <div className=" flex justify-between w-full sm:h-[13rem] items-center p-3 flex-col sm:flex-row h-[25rem]">
+      <div className="w-[90%] sm:w-[75%] h-full">
         <p>
           {card?.card?.info?.itemAttribute?.vegClassifier == "NONVEG" ? (
             <svg
@@ -147,10 +153,10 @@ const ItemCard = ({ card, location, handleRestart }) => {
           </div>
         )}
         <p className="text-md w-[95%] mt-2">
-          {card?.card?.info?.description?.slice(0, 135)} {card?.card?.info?.description?.length>135 && '...'} 
+          {card?.card?.info?.description?.slice(0, 100)} {card?.card?.info?.description?.length>100 && '...'} 
         </p>
       </div>
-      <div className="w-[25%] h-[80%]  flex flex-col relative ">
+      <div className="w-[70%] sm:w-[25%] h-[80%]  flex flex-col relative my-4 sm:my-0 ">
         {card?.card?.info?.imageId && (
           <img
             src={imgURL + card?.card?.info?.imageId}

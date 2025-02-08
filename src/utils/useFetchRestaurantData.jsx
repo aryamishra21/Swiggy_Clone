@@ -11,7 +11,7 @@ const useFetchRestaurantData = (lat, lng) => {
     setisLoading(true);
     try {
       const response = await fetch(
-        `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
+        `/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
       );
       const json = await response.json();
       if (json?.data) {
@@ -57,7 +57,7 @@ const useFetchRestaurantData = (lat, lng) => {
         body: JSON.stringify(payload),
       });
       const data = await response.json();
-      console.log("newData", data);
+      // console.log("newData", data);
       if (data?.data) {
         setData((prev) => [...prev, data.data?.cards || []]);
         setoffsetData(data.data.pageOffset);

@@ -5,6 +5,7 @@ import Footer from './Footer'
 import ScrollToTop from './ScrollToTop'
 import { Provider } from 'react-redux'
 import store from '../utils/store/store'
+import LoginView from './LoginView'
 const AppLayout = () => {
   return (
     <Provider store={store}>

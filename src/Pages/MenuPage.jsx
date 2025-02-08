@@ -10,6 +10,7 @@ import PageNotFound from "../components/PageNotFound";
 import { useDispatch, useSelector } from "react-redux";
 import { LuShoppingBag } from "react-icons/lu";
 import { clearCart } from "../utils/store/cartSlice";
+import ShimmerMenu from "../components/ShimmerMenu";
 const scrollWidth = 250;
 
 const MenuPage = () => {
@@ -24,13 +25,14 @@ const MenuPage = () => {
   const cartData=useSelector((store)=>store.cart.items)
   let quant=0
   cartData?.map((item)=>quant+=item.quantity)
-  if (menu == null) return <ShimmerCard />;
-  if (!menu.cards) return <PageNotFound />;
-
+  if (menu == null) return <ShimmerMenu />;
+  if (!menu?.cards) return <PageNotFound />;
+console.log('menu',menu?.cards.filter((c)=>c?.card?.card?.info?.id)[0].card.card.info)
   const lastCard =
   menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(-1)[0];
 
-const location = lastCard?.card?.card || {};
+// const location = lastCard?.card?.card || {};
+const location=menu?.cards.filter((c)=>c?.card?.card?.info?.id)[0].card.card.info || {}
 console.log(location , 'menu page location')
 
   const handleRestart=()=>setRestart(!restart);
@@ -71,7 +73,7 @@ console.log(location , 'menu page location')
   };
 
   return (
-    <div className="mt-28 mb-10 mx-[24%]">
+    <div className="mt-28 mb-10 mx-[5%] lg:mx-[24%]">
       <p className="text-[0.7rem] ">
         <Link to="/">
           <span className="text-gray-500 hover:text-black">Home</span>
@@ -187,18 +189,17 @@ console.log(location , 'menu page location')
       </div>
       <div className="mx-auto text-center my-5">
         <span className="text-sm font-semibold text-gray-600 mt-10">
-          {/* <svg aria-hidden="true" height="24" width="24" class="sc-gEvEer buqVUw"><use xlinkHref="/core/sprite-DI4fHXai.svg#artDecoRight24"></use></svg> */}
           M E N U
-          {/* <svg aria-hidden="true" height="24" width="24" class="sc-gEvEer buqVUw"><use xlinkHref="/core/sprite-DI4fHXai.svg#artDecoRight24"></use></svg> */}
         </span>
-        <div className="w-full flex border-2 items-center bg-gray-200 rounded-xl my-4 text-gray-600">
+        {/* input hidden */}
+        {/* <div className="w-full flex border-2 items-center bg-gray-200 rounded-xl my-4 text-gray-600">
           <input
             type="text"
             className="w-[95%] p-3 placeholder:text-center bg-gray-200 rounded-xl focus:outline-none placeholder:text-gray-600 placeholder:font-semibold"
             placeholder="Search for dishes"
           />
           <IoIosSearch className="size-[1.5rem]" />
-        </div>
+        </div> */}
         <div className="flex items-start gap-3">
           <button
             className="border border-gray-400 rounded-full shadow-sm flex items-center justify-center w-[4.5rem] h-[2.2rem] relative"
@@ -276,6 +277,7 @@ console.log(location , 'menu page location')
             />
           ))}
       </div>
+
       {restart && <div className=" fixed w-[32rem] border h-[12rem] bottom-[5%] bg-white left-[33%] z-20 shadow-2xl p-8 ">
         <p className="font-bold text-lg">Items already in cart</p>
         <p className="text-sm text-gray-500 pt-1">Your cart contains items from other restaurant. Would you like to reset your cart for adding items from this restaurant?</p>
@@ -285,10 +287,9 @@ console.log(location , 'menu page location')
             dispatch(clearCart());
             handleRestart();
           }}>YES, START AFRESH</button>
-          <button></button>
         </div>
       </div>}
-      {quant>0 && <div className="w-[52%] fixed bottom-0 h-[3rem] z-10 bg-[#60B246]  left-[24%] flex justify-between px-3 items-center text-white text-sm font-bold">
+      {quant>0 && <div className="w-[90%] sm:w-[52%] fixed bottom-0 h-[3rem] z-10 bg-[#60B246]  sm:left-[24%] flex justify-between px-3 items-center text-white text-sm font-bold">
         <p>{quant} item{quant>1 && "s"} added</p>
           <Link to='/cart' className="flex items-center gap-2">
           <p>VIEW CART</p>

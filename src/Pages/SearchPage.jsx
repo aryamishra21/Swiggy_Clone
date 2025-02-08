@@ -7,26 +7,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { RxCross1 } from "react-icons/rx";
 import DishView from "../components/DishView";
 import RestaurantView from "../components/RestaurantView";
+import { addSuggestion } from "../utils/store/searchSlice";
 
 const SearchPage = () => {
   const storedSugg = useSelector((store) => store.search.data);
   const [searchText, setSearchText] = useState("");
-  const [searchSugg, setSearchSugg] = useState([]);
   const [preSearchData, setPreSearchData] = useState(null);
   const [searchData, setSearchData] = useState([]);
   const [showSearchData, setShowSearchData] = useState(false);
   const [restView, setrestView] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchResults, setSearchResults] = useState([]);
+  const dispatch=useDispatch();
   const navigate = useNavigate();
   // const[displayFull,setDisplayFull]=useState(false)
   
   useEffect(() => {
     const timer = setTimeout(() => {
-      // if(storedSugg){
-      //   searchSugg(storedSugg)
-      // }
-      getData();
+      if(storedSugg[searchText]){
+        // console.log('found',storedSugg[searchText])
+        setSearchData(storedSugg[searchText])
+      }
+      else{
+        // console.log('adding')
+        getData();
+      }
     }, 1500);
     return () => {
       clearTimeout(timer);
@@ -38,7 +43,10 @@ const SearchPage = () => {
       `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=28.56184&lng=77.4104894&str=${searchText}&trackingId=undefined&includeIMItem=true`
     );
     const json = await resp?.json();
+    // console.log('searchData',json)
     setSearchData(json?.data?.suggestions);
+    // console.log('added',{[searchText]:json?.data?.suggestions})
+    dispatch(addSuggestion({[searchText]:json?.data?.suggestions}))
   };
 
   useEffect(() => {
@@ -66,17 +74,8 @@ const SearchPage = () => {
     setSearchResults((prev) => [...prev, { [type]: json?.data?.cards }]);
   };
 
-  // const fetchRestaurantsRelated=async(text, type)=>{
-  //   let URL = `https://www.swiggy.com/dapi/restaurants/search/v3?lat=28.56184&lng=77.4104894&str=${text}&trackingId=null&submitAction=SUGGESTION&selectedPLTab=RESTAURANT`;
-  //   let response = await fetch(URL)
-  //   const json = await response?.json();
-  //   console.log("repe1", json.data.cards);
-  //   setSearchResults((prev)=>[...prev,{[type]:json?.data?.cards}]);
-  // }
-
-  // &selectedPLTab=DISH
   return (
-    <div className="mx-[22%] mt-28 ">
+    <div className="md:mx-[5%] xl:mx-[22%] mx-[5%] mt-28 ">
       <div className="border flex w-[100%] mx-auto mt-12 border-gray-400 rounded-md items-center justify-between px-3">
         <input
           type="text"
@@ -95,7 +94,9 @@ const SearchPage = () => {
         {searchText ? (
           <RxCross1
             className="size-[1.5rem] font-bold cursor-pointer"
-            onClick={() => setSearchText("")}
+            onClick={() => {
+              setSearchText("")
+              setShowSearchData(false)}}
           />
         ) : (
           <CiSearch className="size-[1.5rem] font-bold cursor-pointer" />
@@ -280,16 +281,7 @@ const SearchPage = () => {
                   </>
                 )}
 
-                <div className="grid grid-cols-2 gap-4 p-4">
-                  {/* {searchResults.filter((search)=>search?.RESTAURANT)?.map((result)=>result?.RESTAURANT[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards[1]?.card?.card?.restaurants?.map((data)=>{
-                      return(
-                        <div>
-                          {console.log('it',data)}
-                          <RestaurantView data={data}/>
-                        
-                        </div>
-                      )
-                    }))} */}
+                <div className="grid md:grid-cols-2 grid-cols-1 gap-4 p-4">
                   {searchResults
                     .filter((search) => search?.RESTAURANT)
                     ?.map((result) =>
@@ -384,7 +376,7 @@ const SearchPage = () => {
                   )
                 ))}
               </div> */}
-              <div className="bg-gray-200 grid grid-cols-2 mt-5 overflow-y-scroll scrollbar h-[63vh]">
+              <div className="bg-gray-200 grid grid-cols-1 sm:grid-cols-2 mt-5 overflow-y-scroll scrollbar h-[63vh]">
                 {searchResults
                   ?.filter((search) => search.DISH)
                   ?.map((result) =>

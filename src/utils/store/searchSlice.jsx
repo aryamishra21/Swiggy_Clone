@@ -3,11 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const searchSlice=createSlice({
     name:'search',
     initialState:{
-        data:[]
+        data:{}
     },
     reducers:{
-        addSuggestion:(state,payload)=>{
-            state.data.push(payload)
+        addSuggestion:(state,action)=>{
+            const { payload } = action; 
+            state.data = { ...state.data, ...payload };
         }
     }
 })

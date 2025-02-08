@@ -15,7 +15,7 @@ const useFetchCollectionData = (id, lat, lng) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&collection=${id}&tags=&sortBy=&filters=&type=rcv2&offset=0&page_type=null`
+        `/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&collection=${id}&tags=&sortBy=&filters=&type=rcv2&offset=0&page_type=null`
       );
       const json = await response?.json();
       if (json?.data) {

@@ -4,7 +4,7 @@ import ItemCard from "./ItemCard";
 
 const MenuAccordions = ({ item, isVisible, setIsVisible, category, location, handleRestart }) => {
   // console.log('item',item)
-  console.log('menuAccordion location',location)
+  // console.log('menuAccordion location',location)
 
   if (!item?.card?.card) return null; // Prevents crashes if data is missing
 

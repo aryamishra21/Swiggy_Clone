@@ -1,72 +1,128 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { TfiHelpAlt } from "react-icons/tfi";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import LoginView from "./LoginView";
+import { logout } from "../utils/store/UserSlice";
+import HeaderCartView from "./HeaderCartView";
 
 const Header = () => {
-  const cartData=useSelector((store)=>store.cart.items)
-  let quant=0
+  const cartData = useSelector((store) => store.cart.items);
+  const cartLocation = useSelector((store) => store.cart.location);
+  const userData = useSelector((store) => store.user);
+  const [showCart, setShowCart] = useState(false);
+  const dispatch = useDispatch();
+  // console.log(userData)
+  const [showLogin, setShowLogin] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
+  let quant = 0;
   // console.log(cartData)
-  cartData.map((item)=>quant+=item.quantity)
+  cartData.map((item) => (quant += item.quantity));
   return (
-    <div className="h-[5rem] py-2 shadow-lg px-[10%] grid grid-flow-col fixed w-full top-0 bg-white z-20">
-      <div className="col-span-2 flex items-center">
-        <Link to='/'>
-        <svg className="VXJlj" viewBox="0 0 61 61" height="49" width="49">
-          <g clipPath="url(#a)">
-            <path
-              fill="#FF5200"
-              d="M.32 30.5c0-12.966 0-19.446 3.498-23.868a16.086 16.086 0 0 1 2.634-2.634C10.868.5 17.354.5 30.32.5s19.446 0 23.868 3.498c.978.774 1.86 1.656 2.634 2.634C60.32 11.048 60.32 17.534 60.32 30.5s0 19.446-3.498 23.868a16.086 16.086 0 0 1-2.634 2.634C49.772 60.5 43.286 60.5 30.32 60.5s-19.446 0-23.868-3.498a16.086 16.086 0 0 1-2.634-2.634C.32 49.952.32 43.466.32 30.5Z"
-            ></path>
-            <path
-              fill="#fff"
-              fillRule="evenodd"
-              d="M32.317 24.065v-6.216a.735.735 0 0 0-.732-.732.735.735 0 0 0-.732.732v7.302c0 .414.336.744.744.744h.714c10.374 0 11.454.54 10.806 2.73-.03.108-.066.21-.102.324-.006.024-.012.048-.018.066-2.724 8.214-10.092 18.492-12.27 21.432a.764.764 0 0 1-1.23 0c-1.314-1.776-4.53-6.24-7.464-11.304-.198-.462-.294-1.542 2.964-1.542h3.984c.222 0 .402.18.402.402v3.216c0 .384.282.738.666.768a.73.73 0 0 0 .582-.216.701.701 0 0 0 .216-.516v-4.362a.76.76 0 0 0-.756-.756h-8.052c-1.404 0-2.256-1.2-2.814-2.292-1.752-3.672-3.006-7.296-3.006-10.152 0-7.314 5.832-13.896 13.884-13.896 7.17 0 12.6 5.214 13.704 11.52.006.054.048.294.054.342.288 3.096-7.788 2.742-11.184 2.76a.357.357 0 0 1-.36-.36v.006Z"
-              clipRule="evenodd"
-            ></path>
-          </g>
-          <defs>
-            <clipPath id="a">
-              <path fill="#fff" d="M.32.5h60v60h-60z"></path>
-            </clipPath>
-          </defs>
-        </svg>
+    <div className="h-[5rem] py-2 shadow-lg px-[1%] sm:px-[10%] grid grid-flow-col fixed w-full top-0 bg-white z-20">
+      <div className="col-span-2 sm:col-span-4 flex items-center">
+        <Link to="/">
+          <svg className="VXJlj" viewBox="0 0 61 61" height="49" width="49">
+            <g clipPath="url(#a)">
+              <path
+                fill="#FF5200"
+                d="M.32 30.5c0-12.966 0-19.446 3.498-23.868a16.086 16.086 0 0 1 2.634-2.634C10.868.5 17.354.5 30.32.5s19.446 0 23.868 3.498c.978.774 1.86 1.656 2.634 2.634C60.32 11.048 60.32 17.534 60.32 30.5s0 19.446-3.498 23.868a16.086 16.086 0 0 1-2.634 2.634C49.772 60.5 43.286 60.5 30.32 60.5s-19.446 0-23.868-3.498a16.086 16.086 0 0 1-2.634-2.634C.32 49.952.32 43.466.32 30.5Z"
+              ></path>
+              <path
+                fill="#fff"
+                fillRule="evenodd"
+                d="M32.317 24.065v-6.216a.735.735 0 0 0-.732-.732.735.735 0 0 0-.732.732v7.302c0 .414.336.744.744.744h.714c10.374 0 11.454.54 10.806 2.73-.03.108-.066.21-.102.324-.006.024-.012.048-.018.066-2.724 8.214-10.092 18.492-12.27 21.432a.764.764 0 0 1-1.23 0c-1.314-1.776-4.53-6.24-7.464-11.304-.198-.462-.294-1.542 2.964-1.542h3.984c.222 0 .402.18.402.402v3.216c0 .384.282.738.666.768a.73.73 0 0 0 .582-.216.701.701 0 0 0 .216-.516v-4.362a.76.76 0 0 0-.756-.756h-8.052c-1.404 0-2.256-1.2-2.814-2.292-1.752-3.672-3.006-7.296-3.006-10.152 0-7.314 5.832-13.896 13.884-13.896 7.17 0 12.6 5.214 13.704 11.52.006.054.048.294.054.342.288 3.096-7.788 2.742-11.184 2.76a.357.357 0 0 1-.36-.36v.006Z"
+                clipRule="evenodd"
+              ></path>
+            </g>
+            <defs>
+              <clipPath id="a">
+                <path fill="#fff" d="M.32.5h60v60h-60z"></path>
+              </clipPath>
+            </defs>
+          </svg>
         </Link>
       </div>
-      <div className="col-span-1  flex justify-between px-5">
-        <Link to="/search" className="flex items-center gap-2 cursor-pointer">
-            <CiSearch className="size-[1.5rem]"/>
-            <p className="font-semibold">
-            Search
-            </p>
+      <div className="sm:col-span-1 col-span-3  flex justify-between px-5">
+        <Link
+          to="/search"
+          className="flex items-center gap-2 cursor-pointer sm:text-base text-xs"
+        >
+          <CiSearch className="sm:size-[1.5rem] size-[1rem]" />
+          <p className="font-semibold">Search</p>
         </Link>
-        <Link to="/support" className="flex items-center gap-2 cursor-pointer">
-            <TfiHelpAlt className="size-[1.5rem]"/>
+        {/* <Link to="/support" className="flex items-center gap-2 cursor-pointer sm:text-base text-xs">
+            <TfiHelpAlt className="sm:size-[1.5rem] size-[1rem]"/>
             <p className="font-semibold">
             Help
             </p>
-        </Link>        
-        <Link to='/' className="flex items-center gap-2 cursor-pointer">
-            <CiUser className="size-[1.5rem]"/>
-            <p className="font-semibold">
-            Sign In
-            </p>
-        </Link>  
-        <Link to="/cart" className="flex items-center gap-2 cursor-pointer">
-        {/* <> */}
-        <div className="relative ">
-            <CiShoppingCart className="size-[2.2rem] relative"/>
-              <span className="absolute top-[25%] left-[42.5%] text-[0.7rem] font-semibold">{quant}</span>
+        </Link>         */}
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => {
+            if (userData?.currUserMail != "") {
+              setShowLogout(!showLogout);
+              console.log("show", showLogin, showLogout);
+            } else {
+              console.log("show1", showLogin, showLogout);
+              setShowLogin(!showLogin);
+            }
+          }}
+        >
+          <CiUser className="sm:size-[1.5rem] size-[1rem]" />
+          <p className="font-semibold sm:text-base text-xs">
+            {userData?.currUserMail != "" &&
+              userData?.userCred?.find(
+                (det) => det.email == userData.currUserMail
+              ).name}
+            {userData?.currUserMail == "" && "Sign In"}
+          </p>
         </div>
-            <p className="font-semibold">
-            Cart
-            </p>
-        {/* </Link>       */}
+        <Link
+          to="/cart"
+          className="flex items-center gap-2 cursor-pointer sm:text-base text-xs"
+          onMouseOver={() => setShowCart(true)}
+          onMouseOut={() => setShowCart(false)}
+        >
+          {/* <> */}
+          <div className="relative ">
+            <CiShoppingCart className="sm:size-[2.2rem] relative size-[1.8rem]" />
+            <span className="absolute top-[21%] left-[42%] !text-[0.7rem] font-semibold">
+              {quant}
+            </span>
+          </div>
+          <p className="font-semibold">Cart</p>
+          {/* </Link>       */}
         </Link>
+        {showCart && (
+          <div
+            className="border w-[24rem] p-4 border-t-2 border-t-orange-600 fixed right-[10%] bg-white top-[10%]"
+            style={{ "box-shadow": "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+            onMouseOver={() => setShowCart(true)}
+            onMouseOut={() => setShowCart(false)}
+          >
+            <HeaderCartView/>
+          </div>
+        )}
       </div>
+      {showLogin && <LoginView setShowLogin={setShowLogin} />}
+      {showLogout && (
+        <div className=" absolute top-[100%] right-[20%] w-[8rem] h-[5rem] bg-gray-200 rounded-lg text-center flex items-center justify-center">
+          <button
+            className="px-3 py-2 shadow-lg rounded-lg my-auto bg-white text-sm font-semibold"
+            onClick={() => {
+              dispatch(logout());
+              setShowLogin(false);
+              setShowLogout(false);
+            }}
+          >
+            Logout?
+          </button>
+        </div>
+      )}
     </div>
   );
 };

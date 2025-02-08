@@ -39,7 +39,7 @@ const DishView = ({ info }) => {
           )}
         </span>
         <div className="flex justify-between">
-          <div className="flex flex-col gap-2 mt-1">
+          <div className="flex flex-col gap-2 mt-1 pr-4">
             <p className="font-bold">{info?.info?.name}</p>
             <div className="flex">
               <p
