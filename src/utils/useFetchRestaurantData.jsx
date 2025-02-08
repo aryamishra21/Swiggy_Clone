@@ -49,7 +49,7 @@ const useFetchRestaurantData = (lat, lng) => {
         page_type: "DESKTOP_WEB_LISTING",
         _csrf: csrfToken,
       };
-      const response = await fetch("/dapi/restaurants/list/update", {
+      const response = await fetch("https://www.swiggy.com/dapi/restaurants/list/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
