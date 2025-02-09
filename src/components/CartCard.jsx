@@ -37,10 +37,11 @@ const CartCard = ({ item }) => {
         {item?.ratings?.aggregatedRating?.rating && (
           <div className="mt-3 flex items-center gap-1">
             {item?.ratings?.aggregatedRating.rating < 4 && (
-              {yellowStar}
+                          (<img src={yellowStar}/>)
             )}
             {item?.ratings?.aggregatedRating.rating >= 4 && (
-              {greenStar}
+                          (<img src={greenStar}/>)
+
             )}
             <p className="text-sm font-semibold">
               <span
