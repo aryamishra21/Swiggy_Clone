@@ -44,7 +44,7 @@ const useFetchCollectionData = (id, lat, lng) => {
         lng: lng.toString(),
         nextOffset: offsetData.nextOffset,
         page_type: null,
-        sortAttribute:sort?sort:'',
+        sortAttribute:sort || "",
         sortBy: '',
         tags: "",
         type: "rcv2",
