@@ -6,9 +6,9 @@
 [[redirects]]
   from = "/api/*"
   to = "https://www.swiggy.com/api/:splat"
-  status = 302
+  status = 200
 
 [[redirects]]
   from = "/dapi/*"
   to = "https://www.swiggy.com/dapi/:splat"
-  status = 302
+  status = 200
