@@ -77,11 +77,11 @@ const RestaurantWithOnline = ({ data, fetchMore, hasMore, isLoading }) => {
 
       {/* Filter Buttons */}
       <div className="my-5 mx-[13%]">
-        <div className="flex gap-2">
+        <div className="flex gap-2 overflow-x-scroll py-1 scrollbar ">
           {filters.map((filter)=>{
             return(
               <button
-              className={"py-2 px-3 border border-gray-300 shadow-md rounded-full text-sm font-semibold flex items-center gap-1 "+(filteredCriteria===Object.keys(filter)[0]?'bg-gray-300':'bg-white')}
+              className={"py-2 px-3 border border-gray-300 shadow-md rounded-full text-sm font-semibold flex items-center gap-1 min-w-[7rem] sm:min-w-[5rem] "+(filteredCriteria===Object.keys(filter)[0]?'bg-gray-300':'bg-white')}
               onClick={() =>{
                 if(filteredCriteria!==Object.keys(filter)[0])
                 {

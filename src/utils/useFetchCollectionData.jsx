@@ -35,7 +35,7 @@ const useFetchCollectionData = (id, lat, lng) => {
     if (!offsetData?.nextOffset || isLoading || !csrfToken) return;
     // console.log(lat,lng)
     setIsLoading(true);
-    console.log('sort type',sort)
+    // console.log('sort type',sort)
     try {
       const payload = {
         collection: id,
