@@ -42,7 +42,7 @@ const useFetchCollectionData = (id, lat, lng) => {
         filters: "",
         lat: lat.toString(),
         lng: lng.toString(),
-        nextOffset: offsetData.nextOffset,
+        nextOffset: sort ? offsetData?.nextOffset : offsetData?.nextOffset,
         page_type: null,
         sortAttribute:sort || "",
         sortBy: '',

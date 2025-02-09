@@ -57,10 +57,10 @@ const CollectionPage = () => {
   if (!data.length) return <ShimmerCard />;
   return (
     <div
-      className="mt-20 pt-14 border px-[5%] md:px-[9%] p-2 overflow-y-auto scrollbar "
+      className="mt-20 pt-14 px-[5%] md:px-[9%] p-2 overflow-y-auto scrollbar "
       ref={refContainer}
       onScroll={handleScroll}
-      style={{ height: "calc(100vh - 115px)" }}
+      style={{ height: "calc(100vh - 80px)" }}
     >
       <p className="font-bold text-4xl text-gray-800">{title}</p>
       <p className="text-lg text-gray-600 my-2">
