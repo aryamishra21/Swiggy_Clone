@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { IoStarSharp } from "react-icons/io5";
 import { FaAngleRight } from "react-icons/fa6";
 import { imgURL } from "./../utils/constants";
-
+import veg from "../utils/svgs/vegpng.png"
+import nonVeg from "../utils/svgs/nonvegpng.png"
 const DishView = ({ info }) => {
     // console.log('info',info)
     const[displayFull,setDisplayFull]=useState(false)
@@ -19,23 +20,11 @@ const DishView = ({ info }) => {
       <div>
         <span>
           {!info?.info?.isVeg ? (
-            <svg
-              aria-hidden="true"
-              height="16"
-              width="16"
-              class="sc-bXCLTC jnXAjM"
-            >
-              <use xlinkHref="/food/sprite-CiiAtHUR.svg#nonvegNonVeg16"></use>
-            </svg>
+            <img src={nonVeg} className=" size-5 "/>
+
           ) : (
-            <svg
-              aria-hidden="true"
-              height="16"
-              width="16"
-              class="sc-bXCLTC jnXAjM"
-            >
-              <use xlinkHref="/food/sprite-CiiAtHUR.svg#vegVeg16"></use>
-            </svg>
+            <img src={veg} className=" size-5 "/>
+
           )}
         </span>
         <div className="flex justify-between">

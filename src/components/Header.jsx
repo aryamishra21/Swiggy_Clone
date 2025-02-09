@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginView from "./LoginView";
 import { logout } from "../utils/store/UserSlice";
 import HeaderCartView from "./HeaderCartView";
-
+// import swiggy from '../utils/svgs/swiggy.svg'
 const Header = () => {
   const cartData = useSelector((store) => store.cart.items);
   const cartLocation = useSelector((store) => store.cart.location);
@@ -25,7 +25,8 @@ const Header = () => {
     <div className="h-[5rem] py-2 shadow-lg px-[1%] sm:px-[10%] grid grid-flow-col fixed w-full top-0 bg-white z-20">
       <div className="col-span-2 sm:col-span-4 flex items-center">
         <Link to="/">
-          <svg className="VXJlj" viewBox="0 0 61 61" height="49" width="49">
+        {/* {swiggy} */}
+        <svg className="VXJlj" viewBox="0 0 61 61" height="49" width="49">
             <g clipPath="url(#a)">
               <path
                 fill="#FF5200"

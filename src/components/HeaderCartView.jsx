@@ -2,6 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { imgURL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import nonVeg from '../utils/svgs/nonvegpng.png'
+import veg from "../utils/svgs/vegpng.png"
+
 const HeaderCartView = () => {
   const cartData = useSelector((store) => store.cart.items);
   const cartLocation = useSelector((store) => store.cart.location);
@@ -40,23 +43,11 @@ const HeaderCartView = () => {
             <div className="flex items-center gap-1 text-sm">
               <p>
                 {item.isVeg ? (
-                  <svg
-                    aria-hidden="true"
-                    height="14"
-                    width="14"
-                    class="sc-bXCLTC jnXAjM"
-                  >
-                    <use xlinkHref="/food/sprite-CiiAtHUR.svg#vegVeg16"></use>
-                  </svg>
+                  // {veg}
+                  <img src={veg} className=" size-5  "/>
                 ) : (
-                  <svg
-                    aria-hidden="true"
-                    height="14"
-                    width="14"
-                    class="sc-bXCLTC jnXAjM"
-                  >
-                    <use xlinkHref="/food/sprite-CiiAtHUR.svg#nonvegNonVeg16"></use>
-                  </svg>
+                  <img src={nonVeg} className=" size-5 "/>
+                  // {nonVeg}
                 )}
               </p>
               <p className="max-w-[70%] overflow-ellipsis text-nowrap overflow-hidden">{item.name}</p>

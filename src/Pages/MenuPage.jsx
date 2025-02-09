@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { LuShoppingBag } from "react-icons/lu";
 import { clearCart } from "../utils/store/cartSlice";
 import ShimmerMenu from "../components/ShimmerMenu";
+import veg from '../utils/svgs/vegpng.png'
+import nonVeg from '../utils/svgs/nonvegpng.png'
+
 const scrollWidth = 250;
 
 const MenuPage = () => {
@@ -215,15 +218,8 @@ console.log(location , 'menu page location')
                   category === "VEG" ? "translate-x-[80%]" : "translate-x-[0%]"
                 }`}
               >
-                <svg
-                  style={{ backgroundColor: "white" }}
-                  aria-hidden="true"
-                  height="20"
-                  width="20"
-                  class="sc-bXCLTC jnXAjM"
-                >
-                  <use xlinkHref="/food/sprite-CiiAtHUR.svg#vegVeg16"></use>
-                </svg>
+            <img src={veg} className=" size-5 "/>
+
               </div>
             </div>
           </button>
@@ -243,15 +239,8 @@ console.log(location , 'menu page location')
                     : "translate-x-[0%]"
                 }`}
               >
-                <svg
-                  style={{ backgroundColor: "white" }}
-                  aria-hidden="true"
-                  height="20"
-                  width="20"
-                  class="sc-bXCLTC jnXAjM"
-                >
-                  <use xlinkHref="/food/sprite-CiiAtHUR.svg#nonvegNonVeg16"></use>
-                </svg>
+            <img src={nonVeg} className=" size-5 "/>
+
               </div>
             </div>
           </button>
